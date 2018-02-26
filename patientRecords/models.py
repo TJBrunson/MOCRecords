@@ -17,3 +17,6 @@ class PatientInfo(models.Model):
         (NEITHER,'Neither'),
     )
     sex = models.CharField(max_length=7, choices=SEX_CHOICES, default=NEITHER)
+
+    def __str__(self):
+        return self.first_name
