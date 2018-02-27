@@ -1,6 +1,5 @@
 {% load static %}
 <!doctype html>
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -9,15 +8,14 @@
 
     <!-- Bootstrap CSS -->
     <link href="{% static 'patientRecords/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'patientRecords/custom.css' %}" rel="stylesheet">
 
-    <title>SMMOC Patient Database</title>
+    <title>New Patient</title>
   </head>
   <body>
     <!--Header-->
-      <div class="container">
-        <h1 class="border-bottom">Santa Maria Medical Outreach Clinic <small>Patient Database</small></h1>
-      </div>
+    <div class="container">
+      <h2 class="border-bottom">New Patient Intake Form</h2>
+    </div>
     <!--nav bar-->
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light ">
@@ -27,22 +25,38 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="templets/new-patient.html">New Paitent</a>
+            <a class="nav-item nav-link" href="new-patient.html">New Paitent</a>
             <a class="nav-item nav-link" href="#">Search Patients</a>
             <a class="nav-item nav-link disabled" href="#">Database Tools</a>
           </div>
         </div>
       </nav>
+      <hr>
     </div>
-    <!--Section-->
+    <!--Form Container-->
     <div class="container">
-      <div class="center">
-        <a href="patientRecords/new_patient.html" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> New Patient</p></a>
-        <a href="#" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> Search Patient</p></a>
-        <a href="#" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block disabled" role="button" aria-pressed="true"><p> Database Tools</p></a>
-      </div>
+      <form  action="Python/test.py" method="post" class="form">
+        <div class="form-group">
+          <label for="name">Enter Name</label>
+          <input type="text" class="form-control my-1" placeholder="First Name" name="firstName">
+          <input type="text" class="form-control my-1" placeholder="Nickname" name="nickName">
+          <input type="text" class="form-control my-1" placeholder="Last Name" name="lastName">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select name="gender" class="form-control">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <!--//TODO: add DOB here -->
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg" name="button">Submit</button>
+        </div>
+      </form>
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then popper, then Bootstrap JS -->
     <script src="{% static 'patientRecords/jquery-3.3.1.min.js' %}"></script>
