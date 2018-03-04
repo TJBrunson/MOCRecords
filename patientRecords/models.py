@@ -10,7 +10,6 @@ class PatientInfo(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(auto_now=False, auto_now_add=False)
     school_grade = models.CharField(max_length=15, blank=True)
-    school = models.CharField(max_length=20, blank=True)
 
     #choice for sex
     MALE = 'Male'
@@ -22,6 +21,19 @@ class PatientInfo(models.Model):
         (NEITHER,'Neither'),
     )
     sex = models.CharField(max_length=7, choices=SEX_CHOICES, default=NEITHER)
+
+    #choice for school
+    SANTA_MARIA = 'Santa Maria'
+    SAN_JOSE = 'San Jose'
+    PREPA = 'Prepa'
+    NONE = 'None'
+    SCHOOL_CHOICES=(
+        (SANTA_MARIA, 'Santa Maria'),
+        (SAN_JOSE, 'San Jose'),
+        (PREPA, 'Prepa'),
+        (NONE, 'None')
+    )
+    school = models.CharField(max_length=20, choices=SCHOOL_CHOICES)
 
     def __str__(self):
         return self.first_name
@@ -74,8 +86,20 @@ class VisitInfo(models.Model):
     meds_perscribed = models.CharField(max_length=100, blank=True, default="None")
     follow_up_required = models.CharField(max_length=3, choices=yes_no_choice, default='No')
 
-#class for Eyes and Checkout
-class checkout(models.Model):
+#class for Eyes
+class EyeCare(models.Model):
+    patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    date_time_of_eye_exam = models.DateTimeField('Time of Eye Exam')
+    od = models.IntegerField(blank=True)
+    os = models.IntegerField(blank=True)
+    near = models.CharField(max_length=100, blank=True)
+    pinhole = models.CharField(max_length=100, blank=True)
+    exam_notes = models.CharField(max_length=250, blank=True)
+    assessment = models.CharField(max_length=250, blank=True)
+    plan = models.CharField(max_length=250, blank=True)
+
+#class for Checkout
+class Checkout(models.Model):
     #choice setup
     YES = 'Yes'
     NO = 'No'
@@ -85,10 +109,8 @@ class checkout(models.Model):
     )
 
     #db table fields
-    patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE, default=datetime.datetime.now())
     date_time_of_checkout = models.DateTimeField('Time of checkout')
-    od = models.IntegerField(blank=True)
-    os = models.IntegerField(blank=True)
     albendazol = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     fluoride_varnish = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     meds_administered = models.CharField(max_length=100, default='N/A')
