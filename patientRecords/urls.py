@@ -1,9 +1,9 @@
-from django.urls import path, re_path
+from django.conf.urls import url
 
 from . import views
 
 app_name = 'patientRecords'
 urlpatterns = [
-    path('', views.IndexView),
-    path('patientRecords/', views.NewPatientView),
+    url(r'^$', views.IndexView, name="index"),
+    url(r'^new_patient/$', views.NewPatientView, name = "new_patient"),
 ]

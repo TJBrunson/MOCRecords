@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from django.forms import ModelForm
 
 # Create your models here.
 class PatientInfo(models.Model):
@@ -33,7 +34,7 @@ class PatientInfo(models.Model):
         (PREPA, 'Prepa'),
         (NONE, 'None')
     )
-    school = models.CharField(max_length=20, choices=SCHOOL_CHOICES)
+    school = models.CharField(max_length=20, choices=SCHOOL_CHOICES, default=NONE)
 
     def __str__(self):
         return self.first_name
