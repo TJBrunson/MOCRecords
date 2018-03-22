@@ -1,51 +1,12 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends 'base_layout.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link href="{% static 'patientRecords/bootstrap.min.css' %}" rel="stylesheet">
-
-    <title>New Patient</title>
-  </head>
-  <body>
-    <!--Header-->
-    <div class="container">
-      <h2 class="border-bottom">New Patient Intake Form</h2>
-    </div>
-    <!--nav bar-->
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <a class="navbar-brand" href="#">SMMOC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="new-patient.html">New Paitent</a>
-            <a class="nav-item nav-link" href="#">Search Patients</a>
-            <a class="nav-item nav-link disabled" href="#">Database Tools</a>
-          </div>
-        </div>
-      </nav>
-      <hr>
-    </div>
-
-    <!--Form Container-->
-    <div class="container">
-      <form  action="{% url 'patientRecords:new_patient' %}" method="post" class="form">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit", value="Create">
-      </form>
-    </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then popper, then Bootstrap JS -->
-    <script src="{% static 'patientRecords/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'patientRecords/popper.min.js' %}"></script>
-    <script src="{% static 'patientRecords/bootstrap.min.js' %}"></script>
-  </body>
-</html>
+{% block content %}
+<!--Form Container-->
+<div class="container">
+  <form  action="{% url 'patientRecords:new_patient' %}" method="post" class="form">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit", value="Create">
+  </form>
+</div>
+{% endblock %}
