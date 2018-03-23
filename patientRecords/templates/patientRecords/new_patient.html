@@ -15,7 +15,9 @@
   <form  action="{% url 'patientRecords:new_patient' %}" method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <input type="submit", value="Create">
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
   </form>
 </div>
 {% endblock %}
