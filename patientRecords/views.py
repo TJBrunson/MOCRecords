@@ -25,5 +25,12 @@ def NewPatientView(request):
 
 #view for Checkin
 def Checkin(request, patient_id):
-    patient = get_object_or_404(PatientInfo, pk=patient_id)
-    return render(request, 'patientRecords/checkin.html', {'patient': patient})
+    if request.method == 'POST':
+        #form = forms.PatientCheckinForm(request.POST, request.FILES)
+        #if form.is_valid():
+            #instance = form.save(commit=False)
+            return redirect('patientRecords/index.html')
+    else:
+        patient = get_object_or_404(PatientInfo, pk=patient_id)
+        form = forms.PatientCheckinForm()
+        return render(request, 'patientRecords/checkin.html', {'form':form, 'patient': patient})
