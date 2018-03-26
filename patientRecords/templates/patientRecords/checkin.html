@@ -12,10 +12,12 @@
 {% block content %}
 
 <div class="container">
-  <p>{{patient.first_name}} {{patient.last_name}}</p>
+  <h1>Patient Checkin</h1>
+  <h2>{{patient.first_name}} {{patient.last_name}} {{patient.id}}</h2>
 </div>
 <div class="container">
-  <form  action="{% url 'patientRecords:checkin' %}" method="post" class="form">
+  <form  action="{% url 'patientRecords:checkinsubmit' %}" method="POST" class="form">
+    <input type="hidden" name="patient_id" value="{{patient.id}}" />
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}

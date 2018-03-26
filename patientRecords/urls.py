@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', views.IndexView, name="index"),
     url(r'^new_patient/$', views.NewPatientView, name = "new_patient"),
     path('checkin/<int:patient_id>/', views.Checkin, name="checkin"),
+    path('checkin/checkinsubmit', views.CheckinSubmit, name="checkinsubmit"),
 ]

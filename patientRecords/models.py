@@ -41,7 +41,7 @@ class PatientInfo(models.Model):
 
 #class for checkin information
 class CheckIn(models.Model):
-    patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    patient_id = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
     date_time_of_checkin = models.DateTimeField('Time of Checkin')
     height = models.IntegerField()
     weight = models.IntegerField()
