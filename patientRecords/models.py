@@ -42,7 +42,7 @@ class PatientInfo(models.Model):
 #class for checkin information
 class CheckIn(models.Model):
     patient_id = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
-    date_time_of_checkin = models.DateTimeField('Time of Checkin')
+    checkin_complete = models.IntegerField(default=0)
     height = models.IntegerField()
     weight = models.IntegerField()
     bmi = models.IntegerField()
@@ -52,6 +52,9 @@ class CheckIn(models.Model):
     current_meds = models.CharField(max_length=250, default="None")
     past_history = models.CharField(max_length=250, default="None")
     current_complaints = models.CharField(max_length=250, default="None")
+
+    def __str__(self):
+        return self.patient_id
 
 #class for doctor visit
 class VisitInfo(models.Model):

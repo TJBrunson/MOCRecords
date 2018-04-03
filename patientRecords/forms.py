@@ -9,9 +9,15 @@ class CreateNewPatient(forms.ModelForm):
         fields = ['first_name', 'nickname','last_name',
             'date_of_birth', 'school_grade', 'sex', 'school']
 
-#form for CheckIn
-class PatientCheckinForm(forms.ModelForm):
+#form for new patient checkin
+class CheckinForm(forms.ModelForm):
     class Meta:
         model = models.CheckIn
         fields = ['height', 'weight', 'bmi', 'systolic', 'diastolic',
             'heart_rate', 'current_meds', 'past_history', 'current_complaints']
+
+#form for existing patient checkin
+class ExistingCheckinUpdate(forms.ModelForm):
+    class Meta:
+        model = models.PatientInfo
+        fields = ['school_grade', 'school']
