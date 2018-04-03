@@ -30,6 +30,7 @@ def Checkin(request, patient_id):
         form = forms.PatientCheckinForm()
         return render(request, 'patientRecords/checkin.html', {'patient': patient, 'form':form})
 
+#view for submitting Checkin
 def CheckinSubmit(request):
     if request.method == 'POST':
         form = forms.PatientCheckinForm(request.POST, request.FILES)
@@ -39,3 +40,7 @@ def CheckinSubmit(request):
             instance.patient_id = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
             instance.save()
             return redirect('patientRecords:index')
+
+def PatientSearch(request):
+    patient_list = PatientInfo.objects.order_by('first_name', 'last_name')
+    return render(request, 'patientRecords/patient_search.html', {'patient_list': patient_list })

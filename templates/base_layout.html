@@ -20,14 +20,14 @@
     <!--nav bar-->
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <a class="navbar-brand" href="#">SMMOC</a>
+        <a class="navbar-brand" href="{% url 'patientRecords:index' %}">SMMOC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link" href="{% url 'patientRecords:new_patient' %}">New Paitent</a>
-            <a class="nav-item nav-link" href="#">Search Patients</a>
+            <a class="nav-item nav-link" href="{% url 'patientRecords:patient_search' %}">Search Patients</a>
             <a class="nav-item nav-link" href="#">Checkup Queue</a>
             <a class="nav-item nav-link disabled" href="#">Database Tools</a>
           </div>
