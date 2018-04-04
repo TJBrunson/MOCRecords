@@ -21,3 +21,10 @@ class ExistingCheckinUpdate(forms.ModelForm):
     class Meta:
         model = models.PatientInfo
         fields = ['school_grade', 'school']
+
+##form for doctor checkup_queue
+class CheckUpForm(forms.ModelForm):
+    class Meta:
+        model = models.VisitInfo
+        fields=['heent','neck_nodes','chest_heart','abdomen','exterior','spine',
+            'skin','neuro','teeth','visit_notes','meds_perscribed','follow_up_required',]

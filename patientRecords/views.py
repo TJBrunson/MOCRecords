@@ -67,8 +67,17 @@ def ExistingCheckinSubmit(request):
             checkinForm.save()
             return redirect('patientRecords:index')
 
-#view for checkin Queue
+#view for checkup Queue
 def CheckupQueue(request):
     pk_list = CheckIn.objects.filter(checkin_complete=False).values_list('patient_id')
     patient_list = PatientInfo.objects.filter(pk__in=pk_list)
-    return render(request, 'patientRecords/checkup_queue.html', {'patient_list': patient_list,  'pk_list':pk_list})
+    return render(request, 'patientRecords/checkup_queue.html', {'patient_list': patient_list
+    })
+
+##view for checkup form
+def PatientCheckupForm(request, id):
+    patient = get_object_or_404(PatientInfo, pk=id)
+    checkin_info = get_object_or_404(CheckIn, patient_id=id, checkin_complete=False)
+    form = forms.CheckUpForm()
+    return render(request, 'patientRecords/checkup_form.html', {'patient':patient,
+        'checkin_info':checkin_info, 'form':form})

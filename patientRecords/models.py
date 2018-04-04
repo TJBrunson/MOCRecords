@@ -73,7 +73,7 @@ class VisitInfo(models.Model):
 
     #db table fields
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
-    date_time_of_visit = models.DateTimeField('Time of visit')
+    checkup_complete = models.BooleanField(default=False)
     heent = models.CharField(max_length=8, choices=normal_abnormal_choice)
     neck_nodes = models.CharField(max_length=8, choices=normal_abnormal_choice)
     chest_heart = models.CharField(max_length=8, choices=normal_abnormal_choice)
