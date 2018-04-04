@@ -12,4 +12,5 @@ urlpatterns = [
     path('existing_checkin/existing_checkin_submit', views.ExistingCheckinSubmit, name="existing_checkin_submit"),
     path('checkin/checkinsubmit', views.CheckinSubmit, name="checkinsubmit"),
     path('patient_search', views.PatientSearch, name="patient_search"),
+    path('checkup_queue', views.CheckupQueue, name='checkup_queue'),
 ]

@@ -42,7 +42,7 @@ class PatientInfo(models.Model):
 #class for checkin information
 class CheckIn(models.Model):
     patient_id = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
-    checkin_complete = models.IntegerField(default=0)
+    checkin_complete = models.BooleanField(default=False)
     height = models.IntegerField()
     weight = models.IntegerField()
     bmi = models.IntegerField()
@@ -52,9 +52,6 @@ class CheckIn(models.Model):
     current_meds = models.CharField(max_length=250, default="None")
     past_history = models.CharField(max_length=250, default="None")
     current_complaints = models.CharField(max_length=250, default="None")
-
-    def __str__(self):
-        return self.patient_id
 
 #class for doctor visit
 class VisitInfo(models.Model):
@@ -113,7 +110,7 @@ class Checkout(models.Model):
     )
 
     #db table fields
-    patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE, default=datetime.datetime.now())
+    patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
     date_time_of_checkout = models.DateTimeField('Time of checkout')
     albendazol = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     fluoride_varnish = models.CharField(max_length=3, choices=yes_no_choice, default='No')

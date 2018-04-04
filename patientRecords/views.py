@@ -35,6 +35,7 @@ def CheckinSubmit(request):
         form = forms.CheckinForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
+            instance.checkin_complete = False
             instance.patient_id = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
             instance.save()
             return redirect('patientRecords:index')
@@ -60,7 +61,14 @@ def ExistingCheckinSubmit(request):
         checkin = forms.CheckinForm(request.POST or None)
         if update.is_valid() and checkin.is_valid():
             checkinForm = checkin.save(commit=False)
+            checkinForm.checkin_complete = False
             checkinForm.patient_id = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
             update.save()
             checkinForm.save()
             return redirect('patientRecords:index')
+
+#view for checkin Queue
+def CheckupQueue(request):
+    pk_list = CheckIn.objects.filter(checkin_complete=False).values_list('patient_id')
+    patient_list = PatientInfo.objects.filter(pk__in=pk_list)
+    return render(request, 'patientRecords/checkup_queue.html', {'patient_list': patient_list,  'pk_list':pk_list})
