@@ -1,0 +1,48 @@
+{% extends 'base_layout.html' %}
+
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<!--Form Container-->
+<div class="container">
+  <h2><u>Patient Checkup</u></h2>
+  <h4>{{patient.first_name}} {{patient.last_name}}, {{patient.date_of_birth}}</h4>
+  <table class="table">
+    <tr>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>BMI</th>
+      <th>Blood Pressure</th>
+      <th>Heart Rate</th>
+    </tr>
+    <tr>
+      <td>{{checkin_info.height}}</td>
+      <td>{{checkin_info.weight}}</td>
+      <td>{{checkin_info.bmi}}</td>
+      <td>{{checkin_info.systolic}}/{{checkin_info.diastolic}}</td>
+      <td>{{checkin_info.heart_rate}}</td>
+    </tr>
+  </table>
+  <hr>
+  <p>Med List: {{checkin_info.meds_perscribed}}</p>
+  <p>History: {{checkin_info.past_history}}</p>
+  <p>Complaints: {{checkin_info.current_complaints}}</p>
+
+  <hr>
+
+  <form  action="{% url 'patientRecords:index' %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+  </form>
+</div>
+{% endblock %}
