@@ -81,3 +81,15 @@ def PatientCheckupForm(request, id):
     form = forms.CheckUpForm()
     return render(request, 'patientRecords/checkup_form.html', {'patient':patient,
         'checkin_info':checkin_info, 'form':form})
+
+#view for submitting checkup to db
+def PatientCheckupFormSubmit(request):
+    if request.method == 'POST':
+        instance = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+        form = forms.CheckUpForm(request.POST or None)
+        if form.is_valid():
+            CheckIn.objects.filter(patient_id=request.POST.get('patient_id')).update(checkin_complete=True)
+            checkupForm = form.save(commit=False)
+            checkupForm.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+            checkupForm.save()
+            return render(request, 'patientRecords/index.html')

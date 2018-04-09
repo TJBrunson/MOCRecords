@@ -37,7 +37,8 @@
 
   <hr>
 
-  <form  action="{% url 'patientRecords:index' %}" method="post" class="form">
+  <form  action="{% url 'patientRecords:checkup_submit' %}" method="post" class="form">
+    <input type="hidden" name="patient_id" value="{{patient.id}}" />
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
