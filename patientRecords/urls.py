@@ -17,4 +17,5 @@ urlpatterns = [
     path('checkup/checkup_submit', views.PatientCheckupFormSubmit, name="checkup_submit"),
     path('eye_care_queue', views.EyeExamQueue, name='eye_care_queue'),
     path('eye_care_queue/<int:id>', views.EyeExamForm, name='eye_care_form'),
+    path('checkup/eye_exam_submit', views.EyeExamFormSubmit, name="eye_exam_submit"),
 ]

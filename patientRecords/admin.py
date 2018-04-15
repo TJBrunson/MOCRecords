@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(PatientInfo)
 admin.site.register(CheckIn)
 admin.site.register(VisitInfo)
+admin.site.register(EyeCare)

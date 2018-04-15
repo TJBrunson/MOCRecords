@@ -16,7 +16,7 @@
   <h2>{{patient.first_name}} {{patient.last_name}} {{patient.date_of_birth}}</h2>
 </div>
 <div class="container">
-  <form  action="{% url 'patientRecords:index' %}" method="POST" class="form">
+  <form  action="{% url 'patientRecords:eye_exam_submit' %}" method="POST" class="form">
     <input type="hidden" name="patient_id" value="{{patient.id}}" />
     {% csrf_token %}
     {% bootstrap_form form %}

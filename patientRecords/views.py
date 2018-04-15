@@ -106,3 +106,15 @@ def EyeExamForm(request, id):
     patient = get_object_or_404(PatientInfo, pk=id)
     form = forms.EyeForm()
     return render(request, 'patientRecords/eye_care_form.html', {'patient': patient, 'form': form})
+
+#view for eye exam submit
+def EyeExamFormSubmit(request):
+    if request.method == 'POST':
+        instance = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+        form = forms.EyeForm(request.POST or None)
+        if form.is_valid():
+            VisitInfo.objects.filter(patient_id=request.POST.get('patient_id')).update(checkup_complete=True)
+            formSubmit = form.save(commit=False)
+            formSubmit.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+            formSubmit.save()
+            return render(request, 'patientRecords/index.html')
