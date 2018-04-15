@@ -90,7 +90,7 @@ class VisitInfo(models.Model):
 #class for Eyes
 class EyeCare(models.Model):
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
-    date_time_of_eye_exam = models.DateTimeField('Time of Eye Exam')
+    checkout_complete = models.BooleanField(default=False)
     od = models.IntegerField(blank=True)
     os = models.IntegerField(blank=True)
     near = models.CharField(max_length=100, blank=True)

@@ -74,7 +74,7 @@ def CheckupQueue(request):
     return render(request, 'patientRecords/checkup_queue.html', {'patient_list': patient_list
     })
 
-##view for checkup form
+#view for checkup form
 def PatientCheckupForm(request, id):
     patient = get_object_or_404(PatientInfo, pk=id)
     checkin_info = get_object_or_404(CheckIn, patient_id=id, checkin_complete=False)
@@ -93,3 +93,16 @@ def PatientCheckupFormSubmit(request):
             checkupForm.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
             checkupForm.save()
             return render(request, 'patientRecords/index.html')
+
+#view for eye exam queue
+def EyeExamQueue(request):
+        pk_list = VisitInfo.objects.filter(checkup_complete=False).values_list('patient_id')
+        patient_list = PatientInfo.objects.filter(pk__in=pk_list)
+        return render(request, 'patientRecords/eye_care_queue.html', {'patient_list': patient_list
+        })
+
+#view for eye exam form
+def EyeExamForm(request, id):
+    patient = get_object_or_404(PatientInfo, pk=id)
+    form = forms.EyeForm()
+    return render(request, 'patientRecords/eye_care_form.html', {'patient': patient, 'form': form})

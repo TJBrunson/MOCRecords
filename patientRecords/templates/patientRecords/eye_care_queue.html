@@ -1,0 +1,38 @@
+{% extends 'base_layout.html' %}
+
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<!--Form Container-->
+<div class="container">
+  {% if patient_list %}
+    <table class="table table-striped">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Nickname</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Sex</th>
+        <th scope="col">Birthday</th>
+      </tr>
+    {% for patient in patient_list.all %}
+      <tr>
+        <td><a href="{% url 'patientRecords:eye_care_form' patient.id %}">{{patient.first_name}}</a></td>
+        <td>{{patient.nickname}}</td>
+        <td>{{patient.last_name}}</td>
+        <td>{{patient.sex}}</td>
+        <td>{{patient.date_of_birth}}</td>
+      </tr>
+    {%  endfor %}
+    </table>
+  {% else %}
+    <p>No patients available</p>
+  {% endif %}
+</div>
+{% endblock %}

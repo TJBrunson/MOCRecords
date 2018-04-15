@@ -28,3 +28,9 @@ class CheckUpForm(forms.ModelForm):
         model = models.VisitInfo
         fields=['heent','neck_nodes','chest_heart','abdomen','exterior','spine',
             'skin','neuro','teeth','visit_notes','meds_perscribed','follow_up_required',]
+
+#form for eye exam
+class EyeForm(forms.ModelForm):
+    class Meta:
+        model= models.EyeCare
+        fields=['od','os','near','pinhole','exam_notes','assessment','plan']
