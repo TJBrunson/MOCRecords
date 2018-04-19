@@ -118,3 +118,27 @@ def EyeExamFormSubmit(request):
             formSubmit.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
             formSubmit.save()
             return render(request, 'patientRecords/index.html')
+
+#view for checkout queue
+def CheckoutQueue(request):
+    pk_list = EyeCare.objects.filter(checkout_complete=False).values_list('patient_id')
+    patient_list = PatientInfo.objects.filter(pk__in=pk_list)
+    return render(request, 'patientRecords/checkout_queue.html', {'patient_list':patient_list})
+
+#view for checkout form
+def checkoutForm(request, id):
+    patient = get_object_or_404(PatientInfo, pk=id)
+    form = forms.CheckoutForm()
+    return render(request, 'patientRecords/checkout_form.html', {'patient':patient, 'form':form})
+
+#view for checkout submit
+def CheckoutSubmit(request):
+    if request.method == 'POST':
+        instance = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+        form = forms.CheckoutForm(request.POST or None)
+        if form.is_valid():
+            EyeCare.objects.filter(patient_id=request.POST.get('patient_id')).update(checkout_complete=True)
+            formSubmit = form.save(commit=False)
+            formSubmit.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+            formSubmit.save()
+            return render(request, 'patientRecords/index.html')

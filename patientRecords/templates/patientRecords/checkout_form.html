@@ -1,0 +1,28 @@
+{% extends 'base_layout.html' %}
+
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<!--Form Container-->
+<div class="container">
+  <h1>Patient Checkin</h1>
+  <h2>{{patient.first_name}} {{patient.last_name}} {{patient.date_of_birth}}</h2>
+</div>
+<div class="container">
+  <form  action="{% url 'patientRecords:checkout_submit' %}" method="POST" class="form">
+    <input type="hidden" name="patient_id" value="{{patient.id}}" />
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+  </form>
+</div>
+{% endblock %}

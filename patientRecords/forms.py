@@ -34,3 +34,9 @@ class EyeForm(forms.ModelForm):
     class Meta:
         model= models.EyeCare
         fields=['od','os','near','pinhole','exam_notes','assessment','plan']
+
+#form for checkout
+class CheckoutForm(forms.ModelForm):
+    class Meta:
+        model = models.Checkout
+        fields = ['albendazol','fluoride_varnish','meds_administered','followup',]

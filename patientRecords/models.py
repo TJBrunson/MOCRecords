@@ -53,6 +53,9 @@ class CheckIn(models.Model):
     past_history = models.CharField(max_length=250, default="None")
     current_complaints = models.CharField(max_length=250, default="None")
 
+    def __str__(self):
+        return self.patient_id.first_name
+
 #class for doctor visit
 class VisitInfo(models.Model):
     #Choice setup
@@ -87,6 +90,9 @@ class VisitInfo(models.Model):
     meds_perscribed = models.CharField(max_length=100, blank=True, default="None")
     follow_up_required = models.CharField(max_length=3, choices=yes_no_choice, default='No')
 
+    def __str__(self):
+        return self.patient.first_name
+
 #class for Eyes
 class EyeCare(models.Model):
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
@@ -98,6 +104,9 @@ class EyeCare(models.Model):
     exam_notes = models.CharField(max_length=250, blank=True)
     assessment = models.CharField(max_length=250, blank=True)
     plan = models.CharField(max_length=250, blank=True)
+
+    def __str__(self):
+        return self.patient.first_name
 
 #class for Checkout
 class Checkout(models.Model):
@@ -111,8 +120,10 @@ class Checkout(models.Model):
 
     #db table fields
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
-    date_time_of_checkout = models.DateTimeField('Time of checkout')
     albendazol = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     fluoride_varnish = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     meds_administered = models.CharField(max_length=100, default='N/A')
     followup = models.CharField(max_length=100, default='N/A')
+
+    def __str__(self):
+        return self.patient.first_name
