@@ -4,9 +4,11 @@
 <!--Section-->
 <div class="container">
   <div class="center">
+    <h4>Checkins</h4>
     <a href="{% url 'patientRecords:new_patient' %}" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> New Patient</p></a>
     <a href="{% url 'patientRecords:patient_search' %}" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> Search Patient</p></a>
     <hr>
+    <h4>Queues</h4>
     <a href="{% url 'patientRecords:checkup_queue' %}" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> Checkup Queue</p></a>
     <a href="{% url 'patientRecords:eye_care_queue' %}" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> Eye Exam Queue</p></a>
     <a href="{% url 'patientRecords:checkout_queue' %}" class="btn btn-lg btn-outline-dark my-3 pt-4 btn-block" role="button" aria-pressed="true"><p> Checkout Queue</p></a>

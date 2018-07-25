@@ -25,7 +25,7 @@ SECRET_KEY = 'wplbp@58qvin148o(x=4byc$0opiws-zkz3@%ecgbe4w7v44e7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.120', '127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-    'bootstrap_datepicker',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +120,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static-root/'
