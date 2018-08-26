@@ -127,10 +127,3 @@ class Checkout(models.Model):
 
     def __str__(self):
         return self.patient.first_name
-
-class VisitTracker(models.Model):
-    patient_id = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
-    checkin_complete = models.BooleanField(default=False)
-    visit_info_complete = models.BooleanField(default=False)
-    eyecare_complete = models.BooleanField(default=False)
-    checkout_complete = models.BooleanField(default=False)
