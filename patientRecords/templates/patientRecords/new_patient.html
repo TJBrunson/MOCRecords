@@ -6,10 +6,22 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 
+<script>
+  $(function () {
+    $(".datepicker").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      changeDay: true,
+      yearRange: "1990:2030",
+    });
+  });
+</script>
+
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
 {% block content %}
+
 <!--Form Container-->
 <div class="container">
   <form  action="{% url 'patientRecords:new_patient' %}" method="post" class="form">
@@ -20,4 +32,5 @@
     {% endbuttons %}
   </form>
 </div>
+
 {% endblock %}

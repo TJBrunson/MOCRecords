@@ -8,6 +8,9 @@ class CreateNewPatient(forms.ModelForm):
         model = models.PatientInfo
         fields = ['first_name', 'nickname','last_name',
             'date_of_birth', 'school_grade', 'sex', 'school']
+        widgets = {
+            'date_of_birth' : forms.DateInput(attrs={'class':'datepicker'}),
+        }
 
 #form for new patient checkin
 class CheckinForm(forms.ModelForm):

@@ -36,4 +36,17 @@
     <p>No patients available</p>
   {% endif %}
 </div>
+
+<script>
+  $(function () {
+    $(".datepicker").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      changeDay: true,
+      yearRange: "1900:2012",
+
+    });
+  });
+</script>
+
 {% endblock %}
