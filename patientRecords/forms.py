@@ -16,7 +16,7 @@ class CreateNewPatient(forms.ModelForm):
 class CheckinForm(forms.ModelForm):
     class Meta:
         model = models.CheckIn
-        fields = ['height', 'weight', 'bmi', 'systolic', 'diastolic',
+        fields = ['height', 'current_date', 'weight', 'bmi', 'systolic', 'diastolic',
             'heart_rate', 'current_meds', 'past_history', 'current_complaints']
 
 #form for existing patient checkin

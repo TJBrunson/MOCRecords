@@ -91,6 +91,7 @@ def PatientCheckupFormSubmit(request):
             CheckIn.objects.filter(patient_id=request.POST.get('patient_id')).update(checkin_complete=True)
             checkupForm = form.save(commit=False)
             checkupForm.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+            checkupForm.check_in = CheckIn.objects.get(pk=request.POST.get('checkin_id'))
             checkupForm.save()
             return render(request, 'patientRecords/index.html')
 
@@ -104,8 +105,9 @@ def EyeExamQueue(request):
 #view for eye exam form
 def EyeExamForm(request, id):
     patient = get_object_or_404(PatientInfo, pk=id)
+    checkup_info = get_object_or_404(VisitInfo, patient_id=id, checkup_complete=False)
     form = forms.EyeForm()
-    return render(request, 'patientRecords/eye_care_form.html', {'patient': patient, 'form': form})
+    return render(request, 'patientRecords/eye_care_form.html', {'patient': patient, 'form': form, 'checkup_info':checkup_info})
 
 #view for eye exam submit
 def EyeExamFormSubmit(request):
@@ -113,9 +115,11 @@ def EyeExamFormSubmit(request):
         instance = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
         form = forms.EyeForm(request.POST or None)
         if form.is_valid():
+            visit = VisitInfo.objects.get(pk=request.POST.get('checkup_id'))
             VisitInfo.objects.filter(patient_id=request.POST.get('patient_id')).update(checkup_complete=True)
             formSubmit = form.save(commit=False)
             formSubmit.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+            formSubmit.check_in = CheckIn.objects.get(pk=visit.check_in.id)
             formSubmit.save()
             return render(request, 'patientRecords/index.html')
 
@@ -128,8 +132,9 @@ def CheckoutQueue(request):
 #view for checkout form
 def checkoutForm(request, id):
     patient = get_object_or_404(PatientInfo, pk=id)
+    eye_care = get_object_or_404(EyeCare, patient=id, checkout_complete=False)
     form = forms.CheckoutForm()
-    return render(request, 'patientRecords/checkout_form.html', {'patient':patient, 'form':form})
+    return render(request, 'patientRecords/checkout_form.html', {'patient':patient, 'form':form, 'eye_care':eye_care})
 
 #view for checkout submit
 def CheckoutSubmit(request):
@@ -137,8 +142,10 @@ def CheckoutSubmit(request):
         instance = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
         form = forms.CheckoutForm(request.POST or None)
         if form.is_valid():
+            eye_care = EyeCare.objects.get(pk=request.POST.get('eye_care_id'))
             EyeCare.objects.filter(patient_id=request.POST.get('patient_id')).update(checkout_complete=True)
             formSubmit = form.save(commit=False)
             formSubmit.patient = PatientInfo.objects.get(pk=request.POST.get('patient_id'))
+            formSubmit.check_in = CheckIn.objects.get(pk=eye_care.check_in.id)
             formSubmit.save()
             return render(request, 'patientRecords/index.html')

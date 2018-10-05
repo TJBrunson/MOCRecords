@@ -12,12 +12,13 @@
 {% block content %}
 <!--Form Container-->
 <div class="container">
-  <h1>Patient Checkin</h1>
+  <h1>Patient Info</h1>
   <h2>{{patient.first_name}} {{patient.last_name}} {{patient.date_of_birth}}</h2>
 </div>
 <div class="container">
   <form  action="{% url 'patientRecords:eye_exam_submit' %}" method="POST" class="form">
     <input type="hidden" name="patient_id" value="{{patient.id}}" />
+    <input type="hidden" name="checkup_id" value="{{checkup_info.id}}">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
