@@ -23,11 +23,12 @@
       </tr>
     {% for patient in patient_list.all %}
       <tr>
-        <td><a href="{% url 'patientRecords:checkout_form' patient.id %}">{{patient.first_name}}</a></td>
+        <td>{{patient.first_name}}</td>
         <td>{{patient.nickname}}</td>
         <td>{{patient.last_name}}</td>
         <td>{{patient.sex}}</td>
         <td>{{patient.date_of_birth}}</td>
+        <td><a href="{% url 'patientRecords:checkout_form' patient.id %}" class="btn btn-primary">Start</a></td>
       </tr>
     {%  endfor %}
     </table>
