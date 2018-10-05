@@ -27,11 +27,13 @@ class PatientInfo(models.Model):
     SANTA_MARIA = 'Santa Maria'
     SAN_JOSE = 'San Jose'
     PREPA = 'Prepa'
+    Staff = 'Staff'
     NONE = 'None'
     SCHOOL_CHOICES=(
         (SANTA_MARIA, 'Santa Maria'),
         (SAN_JOSE, 'San Jose'),
         (PREPA, 'Prepa'),
+        (Staff, 'Staff'),
         (NONE, 'None')
     )
     school = models.CharField(max_length=20, choices=SCHOOL_CHOICES, default=NONE)
@@ -42,6 +44,7 @@ class PatientInfo(models.Model):
 #class for checkin information
 class CheckIn(models.Model):
     patient_id = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    current_date = models.DateField(auto_now=False, auto_now_add=False, default=datetime.date.today)
     checkin_complete = models.BooleanField(default=False)
     height = models.IntegerField()
     weight = models.IntegerField()
@@ -76,6 +79,7 @@ class VisitInfo(models.Model):
 
     #db table fields
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    check_in = models.ForeignKey(CheckIn, on_delete=models.CASCADE, null=True)
     checkup_complete = models.BooleanField(default=False)
     heent = models.CharField(max_length=8, choices=normal_abnormal_choice)
     neck_nodes = models.CharField(max_length=8, choices=normal_abnormal_choice)
@@ -96,6 +100,7 @@ class VisitInfo(models.Model):
 #class for Eyes
 class EyeCare(models.Model):
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    check_in = models.ForeignKey(CheckIn, on_delete=models.CASCADE, null=True)
     checkout_complete = models.BooleanField(default=False)
     od = models.IntegerField(blank=True)
     os = models.IntegerField(blank=True)
@@ -120,6 +125,7 @@ class Checkout(models.Model):
 
     #db table fields
     patient = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    check_in = models.ForeignKey(CheckIn, on_delete=models.CASCADE, null=True)
     albendazol = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     fluoride_varnish = models.CharField(max_length=3, choices=yes_no_choice, default='No')
     meds_administered = models.CharField(max_length=100, default='N/A')
