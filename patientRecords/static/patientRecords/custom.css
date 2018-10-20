@@ -1,0 +1,16 @@
+#id_od{
+  display:inline;
+  max-width: 5em;
+}
+#od_div{
+  max-width: 25%;
+  float:left;
+}
+#os_div{
+  max-width: 25%;
+  float:left;
+}
+#id_os{
+  display:inline;
+  max-width: 5em;
+}

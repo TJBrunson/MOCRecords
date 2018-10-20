@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm, Textarea
 from . import models
 from django.contrib.admin import widgets
 
@@ -36,7 +37,11 @@ class CheckUpForm(forms.ModelForm):
 class EyeForm(forms.ModelForm):
     class Meta:
         model= models.EyeCare
-        fields=['od','os','near','pinhole','exam_notes','assessment','plan']
+        fields=['od','os','near_left','near_right','exam_notes','assessment','plan']
+        widgets={'assessment' : Textarea(attrs={'rows':5}),
+                'exam_notes' : Textarea(attrs={'rows':5}),
+                'plan' : Textarea(attrs={'rows':5})
+                }
 
 #form for checkout
 class CheckoutForm(forms.ModelForm):
