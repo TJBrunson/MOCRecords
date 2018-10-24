@@ -106,7 +106,7 @@ class EyeCare(models.Model):
     os = models.IntegerField(blank=True)
     near_left = models.IntegerField(blank=True)
     near_right = models.IntegerField(blank=True)
-    exam_notes = models.CharField(max_length=250, blank=True)
+    exam_notes = models.CharField(max_length=250, default="P; VF; MB; Penlight; VFE")
     assessment = models.CharField(max_length=250, blank=True)
     plan = models.CharField(max_length=250, blank=True)
 
