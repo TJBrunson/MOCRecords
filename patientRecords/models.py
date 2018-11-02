@@ -133,3 +133,9 @@ class Checkout(models.Model):
 
     def __str__(self):
         return self.patient.first_name
+
+#class for stand alone medical note
+class MedicalNote(models.Model):
+    patient_id = models.ForeignKey(PatientInfo, on_delete=models.CASCADE)
+    current_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    note = models.CharField(max_length=500)
